@@ -1,1 +1,1 @@
-# GSFNO
+# Generalized Spherical Fourier Neural Operator
