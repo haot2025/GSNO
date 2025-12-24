@@ -1,1 +1,1 @@
-# Green's function Spherical Neural Operator
+# Green's-function Spherical Neural Operator
