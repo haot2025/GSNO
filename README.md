@@ -1,1 +1,1 @@
-# Generalized Spherical Fourier Neural Operator
+# Green's function Spherical Neural Operator
