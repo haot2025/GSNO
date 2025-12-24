@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: Copyright (c) 2022 The torch-harmonics Authors. All rights reserved.
-# SPDX-FileCopyrightText: Copyright (c) 2025 The GSFNO Authors. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2025 The GSNO Authors. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause
 
 
@@ -11,7 +11,7 @@ from ._layers import *
 from functools import partial
 
 
-class GeneralizedSFNO(nn.Module):
+class GSNO(nn.Module):
     """
     Helper module for a single GSFNO block.
     """
@@ -109,9 +109,9 @@ class GeneralizedSFNO(nn.Module):
         return x
 
 
-class GSFNet(nn.Module):
+class GSHNet(nn.Module):
     """
-    Generalized Spherical Fourier Network. Implements by multi-scale structure design and GSFNO blocks.
+    Network based on GSNO. Implements by multi-scale structure design and GSFNO blocks.
 
     Reference:
     -----------
@@ -236,7 +236,7 @@ class GSFNet(nn.Module):
 
 
         self.trans_down1 = RealSHT(*self.img_size, lmax=modes_lat * 2, mmax=modes_lon * 2,
-                                   grid=self.grid).float()  # l和m的设置导致的下采样
+                                   grid=self.grid).float()
         self.itrans_down1 = InverseRealSHT(self.h, self.w, lmax=modes_lat * 2, mmax=modes_lon * 2,
                                            grid=grid_internal).float()
 
@@ -281,7 +281,7 @@ class GSFNet(nn.Module):
             drop_rate=drop_rate, checkpointing=False, gain=1
         )
 
-        self.dblk1 = GeneralizedSFNO(
+        self.dblk1 = GSNO(
             self.trans_down1,
             self.itrans_down1,
             self.embed_dim * 1, #h/w - h/2/w/2
@@ -300,7 +300,7 @@ class GSFNet(nn.Module):
             drop_rate=drop_rate, checkpointing=False, gain=1
         )
 
-        self.dblk2 = GeneralizedSFNO(
+        self.dblk2 = GSNO(
             self.trans_down2,
             self.itrans_down2,
             self.embed_dim * 2,#h/2/w/2 - h/4/w/4
@@ -314,7 +314,7 @@ class GSFNet(nn.Module):
             use_mlp=use_mlp,
         )
 
-        self.upblk1 = GeneralizedSFNO(
+        self.upblk1 = GSNO(
             self.trans_up1,
             self.itrans_up1,
             self.embed_dim * 4,#h/4/w/4 - h/2/w/2
@@ -328,7 +328,7 @@ class GSFNet(nn.Module):
             use_mlp=use_mlp,
         )
 
-        self.upblk2 = GeneralizedSFNO(
+        self.upblk2 = GSNO(
             self.trans_up2,
             self.itrans_up2,
             self.embed_dim * 4,#h/2/w/2 - h/w
@@ -342,7 +342,7 @@ class GSFNet(nn.Module):
             use_mlp=use_mlp,
         )
 
-        self.outblk = GeneralizedSFNO(
+        self.outblk = GSNO(
             self.trans_out,
             self.itrans_out,
             self.embed_dim * 2,#h/w - h/w
@@ -440,5 +440,6 @@ class GSFNet(nn.Module):
             x = torch.cat((x, residual), dim=1)
 
         preds = self.decoder(x)
+
 
         return preds
