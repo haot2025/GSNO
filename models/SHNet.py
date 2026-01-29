@@ -109,9 +109,9 @@ class GSNO(nn.Module):
         return x
 
 
-class GSHNet(nn.Module):
+class SHNet(nn.Module):
     """
-    Network based on GSNO. Implements by multi-scale structure design and GSFNO blocks.
+    U-Network based on GSNO. Implements by multi-scale structure design and GSNO blocks.
 
     Reference:
     -----------
@@ -443,3 +443,4 @@ class GSHNet(nn.Module):
 
 
         return preds
+
