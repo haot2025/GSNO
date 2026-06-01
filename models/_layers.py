@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: Copyright (c) 2022 The torch-harmonics Authors. All rights reserved.
-# SPDX-FileCopyrightText: Copyright (c) 2025 The GSFNO Authors. All rights reserved.
+# SPDX-FileCopyrightText: Copyright (c) 2025 The GSNO Authors. All rights reserved.
 # SPDX-License-Identifier: BSD-3-Clause
 
 import torch
