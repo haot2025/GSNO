@@ -18,6 +18,7 @@ GSNO/
 │
 ├── examples/
 │   ├── SWE/                 # Spherical Shallow Water Equation experiments
+│   └── WB/                  # Weather forecasting experiments
 │
 ├── requirements.txt
 └── README.md
