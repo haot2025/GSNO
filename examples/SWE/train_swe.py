@@ -8,6 +8,8 @@ import torch
 import numpy as np
 
 from models import RealSHT
+from torch.utils.data import DataLoader
+from torch.cuda import amp
 from models.dataset import PdeDataset
 from models.GSNO.gsno import (
     GSNO_Net as GSNO,
