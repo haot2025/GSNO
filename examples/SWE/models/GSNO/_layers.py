@@ -94,7 +94,6 @@ class SpectralConv_GSNO(nn.Module):
                  inverse_transform,
                  in_channels,
                  out_channels,
-                 image_dim,
                  gain = 2.,
                  operator_type = "driscoll-healy",
                  lr_scale_exponent = 0,
@@ -147,7 +146,7 @@ class SpectralConv_GSNO(nn.Module):
         x = x.float()
         residual = x
         b,c,h,w = x.shape
-        x_int = batched_spherical_average(x) #simplied spherical integral
+        x_int = batched_spherical_integral(x) #simplied spherical integral
 
         with torch.autocast(device_type="cuda", enabled=False):
             x = self.forward_transform(x)#coefficients
