@@ -130,8 +130,8 @@ class GSNO_Net(nn.Module):
 
         super().__init__()
 
-        self.img_size_real = img_size
-        self.img_size_fixed = (64, 128)
+        self.img_size_real = img_size ## real image size as input of the model
+        self.img_size_fixed = (256, 512) ## setup original downsample size of the model
         self.grid = grid
         self.grid_internal = grid_internal
         self.scale_factor = scale_factor
